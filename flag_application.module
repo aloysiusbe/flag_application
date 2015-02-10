@@ -1,5 +1,31 @@
 <?php
 /**
+ * Implements hook_flag_flag
+ */
+function flag_application_flag_flag($flag, $entity_id, $account, $flagging) {
+	dsm($flagging);
+	if ($flag->name == 'flag_application') {
+		$result = db_insert('flag_application')
+			->fields(array(
+				'flag_application' => flagging->$flagging_id,
+				'status' => 0,
+			))
+			->execute();
+	}
+}
+
+/**
+ * Implements hook_flag_unflag 
+ */
+function flag_application_flag_unflag($flag, $entity_id, $account, $flagging) {
+	if ($flag->name == 'flag_application') {
+		$deleted = db_delete('flag_application')
+			->condition('flag_application' => flagging->$flagging_id)
+			->execute();
+	}
+}
+
+/**
  * Implements hook_flag_default_flags
  */
 function flag_application_default_flags() {

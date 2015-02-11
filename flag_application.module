@@ -46,7 +46,7 @@ function flag_application_flag_flag($flag, $entity_id, $account, $flagging) {
 function flag_application_flag_unflag($flag, $entity_id, $account, $flagging) {
 	if ($flag->name == 'flag_application') {
 		$deleted = db_delete('flag_application')
-			->condition('flag_application' => $flagging->flagging_id)
+			->condition('flag_application', $flagging->flagging_id)
 			->execute();
 	}
 }

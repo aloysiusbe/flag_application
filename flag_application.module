@@ -10,6 +10,7 @@ function flag_application_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('node_admin_content'),
     'access callback' => 'flag_application_permission',
+    //'access arguments' => array(1, 'delete'),
     'weight' => 0,
     'file' => 'flag_application.admin.inc',
   );
@@ -32,7 +33,7 @@ function flag_application_flag_flag($flag, $entity_id, $account, $flagging) {
 	if ($flag->name == 'flag_application') {
 		$result = db_insert('flag_application')
 			->fields(array(
-				'flag_application' => flagging->$flagging_id,
+				'flag_application' => $flagging->flagging_id,
 				'status' => 0,
 			))
 			->execute();
@@ -45,7 +46,7 @@ function flag_application_flag_flag($flag, $entity_id, $account, $flagging) {
 function flag_application_flag_unflag($flag, $entity_id, $account, $flagging) {
 	if ($flag->name == 'flag_application') {
 		$deleted = db_delete('flag_application')
-			->condition('flag_application' => flagging->$flagging_id)
+			->condition('flag_application' => $flagging->flagging_id)
 			->execute();
 	}
 }
